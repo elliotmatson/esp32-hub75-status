@@ -1,18 +1,17 @@
-#include <Arduino.h>
+#include "utils.h"
 
-// put function declarations here:
-int myFunction(int, int);
+Panel panel;
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+void setup()
+{
+  // Immediately pulls display enable pin low to keep panels from flickering on boot
+  pinMode(OE_PIN, OUTPUT);
+  digitalWrite(OE_PIN, LOW);
+  panel.init();
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+// Just do nothing, eveything is done in tasks
+void loop()
+{
+  vTaskDelete(NULL); // Delete Loop task, we don't need it
 }
